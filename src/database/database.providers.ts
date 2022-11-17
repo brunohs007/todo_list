@@ -8,8 +8,8 @@ export const databaseProviders = [
         type: 'mysql',
         host: 'localhost',
         port: 3306,
-        username: 'bruno',
-        password: 'brunoben007',
+        username: 'root',
+        password: '123456',
         database: 'temtudoaki',
         entities: [
           __dirname + '/../**/*.entity{.ts,.js}',
