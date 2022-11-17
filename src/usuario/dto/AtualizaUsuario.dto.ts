@@ -1,4 +1,4 @@
-import { IsEmail, IsNotEmpty, IsOptional, MinLength } from "class-validator";
+import { IsEmail, IsNotEmpty, IsOptional, MaxLength, MinLength } from "class-validator";
 import { EmailUnico } from "../validacao/email-unico.validator";
 
 export class AtualizaUsuarioDto {
@@ -13,7 +13,8 @@ export class AtualizaUsuarioDto {
   @IsOptional()
   email: string;
 
-  @MinLength(6, {message: 'A senha deve ter 6 caracteres'})
+  @MinLength(6, {message: 'A senha deve ter no minimo 6 caracteres'})
+  @MaxLength(15, {message: 'A senha deve conter no maximo 15 caracteres'})
   @IsOptional()
   senha: string;
 }
