@@ -1,6 +1,6 @@
 export class ListaUsuarioDto{
   constructor(
-    readonly id: string,
+    readonly id: number,
     readonly  nome: string,
   ) {}
 }

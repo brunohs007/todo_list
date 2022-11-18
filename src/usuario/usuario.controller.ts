@@ -13,21 +13,17 @@ export class UsuarioController {
   }
 
   @Post()
-  async criaUsuario(@Body() dadosUsuario: CriaUsuarioDto) {
-    const usuarioEntity = new UsuarioEntity();
-    usuarioEntity.email = dadosUsuario.email;
-    usuarioEntity.senha = dadosUsuario.senha;
-    usuarioEntity.nome = dadosUsuario.nome;
-    usuarioEntity.id = uuid();
+  async criaUsuario(@Body() dadosUsuario: CriaUsuarioDto):Promise<ListaUsuarioDto> {
 
-    await this.usuariorepository.salvar(usuarioEntity)
-    return {
-      usuario : new ListaUsuarioDto(
-        usuarioEntity.id,
-        usuarioEntity.nome,
-      ),
-      mensagem: 'usuario criado com sucesso'
-    }
+    //usuarioEntity.id = uuid();
+    return this.usuariorepository.salvar(dadosUsuario)
+    // return {
+    //   usuario : new ListaUsuarioDto(
+    //     usuarioEntity.id,
+    //     usuarioEntity.nome,
+    //   ),
+    //   mensagem: 'usuario criado com sucesso'
+    // }
   }
 
   @Get()
@@ -43,7 +39,7 @@ export class UsuarioController {
   }
 
   @Put('/:id')
-  async atualizaUsuario(@Param('id') id:string, @Body() dadosAtualizar: AtualizaUsuarioDto){
+  async atualizaUsuario(@Param('id') id:number, @Body() dadosAtualizar: AtualizaUsuarioDto){
     const usuarioAtualizado = await this.usuariorepository.atualiza(id, dadosAtualizar);
 
     return{
@@ -53,7 +49,7 @@ export class UsuarioController {
   }
 
   @Delete('/:id')
-  async removeUsuario(@Param('id') id:string) {
+  async removeUsuario(@Param('id') id:number) {
     const usuarioRemovido = await this.usuariorepository.deleta(id);
 
     return{
