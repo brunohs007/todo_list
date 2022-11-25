@@ -1,4 +1,4 @@
-import { IsEmail, IsNotEmpty, MaxLength, MinLength } from "class-validator";
+import { IsEmail, IsNotEmpty, IsString, MaxLength, MinLength } from "class-validator";
 import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
 // import { EmailUnico } from "../validacao/email-unico.validator";
 
@@ -8,6 +8,7 @@ export class CriaUsuarioDto {
   @PrimaryGeneratedColumn()
   id: number;
 
+  @IsString()
   @IsNotEmpty({ message: 'Nome não pode ser vazio]'})
   nome: string;
 

@@ -13,17 +13,8 @@ export class UsuarioController {
   }
 
   @Post()
-  async criaUsuario(@Body() dadosUsuario: CriaUsuarioDto):Promise<ListaUsuarioDto> {
-
-    //usuarioEntity.id = uuid();
+  async criaUsuario(@Body() dadosUsuario: CriaUsuarioDto){
     return this.usuariorepository.salvar(dadosUsuario)
-    // return {
-    //   usuario : new ListaUsuarioDto(
-    //     usuarioEntity.id,
-    //     usuarioEntity.nome,
-    //   ),
-    //   mensagem: 'usuario criado com sucesso'
-    // }
   }
 
   @Get()

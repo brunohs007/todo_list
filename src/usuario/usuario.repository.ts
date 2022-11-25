@@ -3,68 +3,38 @@ import { UsuarioEntity } from "./validacao/usuario.entity";
 import { Repository } from 'typeorm';
 import { CriaUsuarioDto } from "./dto/CriaUsuario.dto";
 import { ListaUsuarioDto } from "./dto/ListaUsuario.dto";
+import { AtualizaUsuarioDto } from "./dto/AtualizaUsuario.dto";
 
 @Injectable()
 export class UsuarioRepository {
-  private usuarios: UsuarioEntity[] = [];
 
   constructor(
     @Inject('USUARIO_REPOSITORY')
     private usuarioRepository: Repository<UsuarioEntity>,
   ) {}
 
-  async listar(): Promise<UsuarioEntity[]> {
-    return this.usuarioRepository.find();
-  }
-
-  // private usuarios: UsuarioEntity[] = [];
-
-  async salvar(dadosUsuario: CriaUsuarioDto): Promise<any> {
+  async salvar(dadosUsuario: CriaUsuarioDto) {
     const usuarioEntity = new UsuarioEntity();
     usuarioEntity.email = dadosUsuario.email;
     usuarioEntity.senha = dadosUsuario.senha;
     usuarioEntity.nome = dadosUsuario.nome;
     usuarioEntity.id = dadosUsuario.id;
-    this.usuarioRepository.save(usuarioEntity)
-      .then((result) => {
-        return <any> {
-          usuario : new ListaUsuarioDto(
-            dadosUsuario.id,
-            dadosUsuario.nome,
-          ),
-          mensagem: 'usuario criado com sucesso'
-        }
-      })
-      .catch((error) => {
-        return {
-          mensagem: 'erro ao cadastrar usuario'
-        }
-      })
+    return this.usuarioRepository.save(usuarioEntity)
   }
 
-  // async listar(){
-  //   return this.usuarios;
-  // }
-  // async existeComEmail(email: string){
-  //   const possivelUsuario = this.usuarios.find(
-  //     usuario => usuario.email == email
-  //   );
-  //   return possivelUsuario !== undefined;
-  // }
+  async listar(): Promise<UsuarioEntity[]> {
+    return this.usuarioRepository.find();
+  }
 
-  async atualiza(id: number, dadosParaAtualizar: Partial<UsuarioEntity>) {
+  //dados parcialmente compativeis com UsuarioEntity
+  async atualiza(id: number, dadosParaAtualizar: AtualizaUsuarioDto) {
     const usuario = this.buscaPorId(id);
+    const usuarioEntity = new UsuarioEntity();
+    usuarioEntity.email = dadosParaAtualizar.email;
+    usuarioEntity.senha = dadosParaAtualizar.senha;
+    usuarioEntity.nome = dadosParaAtualizar.nome;
 
-    if (!usuario){
-      throw new Error('Usuario nao encontrado');
-    }
-
-    Object.entries(dadosParaAtualizar).forEach(([chave, valor]) => {
-      if (chave === 'id') {
-        return;
-      }
-      usuario[chave] = valor;
-    });
+    await this.usuarioRepository.update({id}, usuarioEntity);
 
     return usuario;
 
@@ -72,23 +42,16 @@ export class UsuarioRepository {
 
   async deleta(id:number) {
     const usuario = this.buscaPorId(id);
-    this.usuarios = this.usuarios.filter(
-      usuarioSalvo => usuarioSalvo.id !== id
-    );
+    await this.usuarioRepository.delete(id);
 
     return usuario;
   }
 
-
   private buscaPorId(id:number){
-    const possivelUsuario = this.usuarios.find(
-      usuarioBuscado => usuarioBuscado.id === id
-    );
-
+    const possivelUsuario = this.usuarioRepository.findOne({ where: { id }});
     if (!possivelUsuario){
       throw new Error('Usuario nao encontrado');
     }
-
     return possivelUsuario;
   }
 }
