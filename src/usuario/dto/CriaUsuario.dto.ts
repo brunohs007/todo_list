@@ -1,6 +1,6 @@
 import { IsEmail, IsNotEmpty, IsString, MaxLength, MinLength } from "class-validator";
 import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
-// import { EmailUnico } from "../validacao/email-unico.validator";
+import { EmailUnico } from "../validacao/email-unico.validator";
 
 @Entity()
 export class CriaUsuarioDto {
@@ -14,7 +14,7 @@ export class CriaUsuarioDto {
 
   @IsEmail(undefined, { message: 'Email informado invalido'})
   //decorator criado
-  // @EmailUnico({message: 'Email ja cadastrado!'})
+  @EmailUnico({message: 'Email ja cadastrado!'})
   email: string;
 
   @MinLength(6, {message: 'A senha deve ter no minimo 6 caracteres'})

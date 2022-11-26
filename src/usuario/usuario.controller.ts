@@ -1,8 +1,7 @@
 import { Body, Controller, Post, Get, Put, Param, Delete } from "@nestjs/common";
 import { UsuarioRepository } from "./usuario.repository";
 import { CriaUsuarioDto } from "./dto/CriaUsuario.dto";
-import { UsuarioEntity } from "./validacao/usuario.entity";
-import { v4 as uuid} from 'uuid';
+import { UsuarioEntity } from "./usuario.entity";
 import { ListaUsuarioDto } from "./dto/ListaUsuario.dto";
 import { AtualizaUsuarioDto } from "./dto/AtualizaUsuario.dto";
 

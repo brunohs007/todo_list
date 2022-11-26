@@ -1,5 +1,5 @@
 import { Inject, Injectable } from "@nestjs/common";
-import { UsuarioEntity } from "./validacao/usuario.entity";
+import { UsuarioEntity } from "./usuario.entity";
 import { Repository } from 'typeorm';
 import { CriaUsuarioDto } from "./dto/CriaUsuario.dto";
 import { ListaUsuarioDto } from "./dto/ListaUsuario.dto";
@@ -54,4 +54,13 @@ export class UsuarioRepository {
     }
     return possivelUsuario;
   }
+
+  // async existeComEmail(email: string, dadosUsuario: CriaUsuarioDto) {
+  //   const usuarioEntity = new UsuarioEntity();
+  //   usuarioEntity.email === dadosUsuario.email;
+  //   // const possivelUsuario = this.usuarioRepository.find(
+  //   //   usuarioEntity => usuarioEntity.email === email
+  //   // );
+  //   return usuarioEntity !== undefined;
+  // }
 }
