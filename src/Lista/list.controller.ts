@@ -1,6 +1,8 @@
 import { Body, Controller, Post, Get, Put, Param, Delete } from "@nestjs/common";
 import { ListRepository } from "./list.repository";
 import { CriaListaDto } from "./dto/CriaLista.dto";
+import { ListaTodosDto } from "./dto/ListaTodos.dto";
+import { AtualizaListaDto } from "./dto/AtualizaLista.dto";
 
 @Controller('/lista')
 export class ListaController {
@@ -13,36 +15,36 @@ export class ListaController {
     return this.listRepository.salvar(dadosLista)
   }
 
-  // @Get()
-  // async listTodas() {
-  //   const usuariosSalvos = await this.usuariorepository.listar();
-  //   const listaTudo = usuariosSalvos.map(
-  //     usuario => new ListaUsuarioDto(
-  //       usuario.id,
-  //       usuario.nome,
-  //     )
-  //   );
-  //   return listaTudo
-  // }
-  //
-  // @Put('/:id')
-  // async atualizaUsuario(@Param('id') id:number, @Body() dadosAtualizar: AtualizaUsuarioDto){
-  //   const usuarioAtualizado = await this.usuariorepository.atualiza(id, dadosAtualizar);
-  //
-  //   return{
-  //     usuario: usuarioAtualizado,
-  //     mensagem: 'usuario atualizado com sucesso!',
-  //   }
-  // }
-  //
-  // @Delete('/:id')
-  // async removeUsuario(@Param('id') id:number) {
-  //   const usuarioRemovido = await this.usuariorepository.deleta(id);
-  //
-  //   return{
-  //     usuario: usuarioRemovido,
-  //     mensagem: 'Usuario removido com sucesso!'
-  //   }
-  // }
+  @Get()
+  async listTodas() {
+    const usuariosSalvos = await this.listRepository.listar();
+    const listaTudo = usuariosSalvos.map(
+      usuario => new ListaTodosDto(
+        usuario.id,
+        usuario.nome,
+        usuario.descricao,
+      )
+    );
+    return listaTudo
+  }
+
+  @Put('/:id')
+  async atualizaLista(@Param('id') id:number, @Body() dadosAtualizar: AtualizaListaDto){
+    const listaAtualizada = await this.listRepository.atualiza(id, dadosAtualizar);
+    return{
+      usuario: listaAtualizada,
+      mensagem: 'usuario atualizado com sucesso!',
+    }
+  }
+
+  @Delete('/:id')
+  async removeLista(@Param('id') id:number) {
+    const listaRemovida = await this.listRepository.deleta(id);
+
+    return{
+      usuario: listaRemovida,
+      mensagem: 'Usuario removido com sucesso!'
+    }
+  }
 
 }
