@@ -1,6 +1,5 @@
 import {
   registerDecorator,
-  ValidationArguments,
   ValidationOptions,
   ValidatorConstraint,
   ValidatorConstraintInterface
@@ -21,7 +20,7 @@ export class EmailUnicoValidator implements ValidatorConstraintInterface{
 
   async validate(value: string): Promise<boolean> {
     const possivelUsuario = await this.usuarioRepository.findAndCountBy({
-      email: value
+      email: value,
     })
     return possivelUsuario.length > 0;
   }
