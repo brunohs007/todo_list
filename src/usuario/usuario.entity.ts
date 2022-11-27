@@ -1,6 +1,5 @@
 import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
 import { IsEmail, IsNotEmpty, MaxLength, MinLength } from "class-validator";
-import { EmailUnico } from "./validacao/email-unico.validator";
 
 @Entity()
 export class UsuarioEntity{
@@ -14,8 +13,6 @@ export class UsuarioEntity{
 
   @Column({ length: 100 })
   @IsEmail(undefined, { message: 'Email informado invalido'})
-  //decorator criado
-  @EmailUnico({message: 'Email ja cadastrado!'})
   email: string;
 
   @Column({ length: 255 })

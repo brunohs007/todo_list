@@ -1,5 +1,4 @@
 import { IsEmail, IsNotEmpty, IsOptional, MaxLength, MinLength } from "class-validator";
-import { EmailUnico } from "../validacao/email-unico.validator";
 
 export class AtualizaUsuarioDto {
 
@@ -8,8 +7,6 @@ export class AtualizaUsuarioDto {
   nome: string;
 
   @IsEmail(undefined, { message: 'Email informado invalido'})
-  //decorator criado
-  @EmailUnico({message: 'Email ja cadastrado!'})
   @IsOptional()
   email: string;
 

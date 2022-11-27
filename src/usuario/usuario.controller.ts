@@ -5,11 +5,14 @@ import { UsuarioEntity } from "./usuario.entity";
 import { ListaUsuarioDto } from "./dto/ListaUsuario.dto";
 import { AtualizaUsuarioDto } from "./dto/AtualizaUsuario.dto";
 import { AuthGuard } from "@nestjs/passport";
+import { AuthService } from "../auth/auth.service";
+import { JwtAuthGuard } from "../auth/jwt-auth.guard";
 
 @Controller('/usuarios')
 export class UsuarioController {
 
-  constructor(private usuariorepository: UsuarioRepository) {
+  constructor(private usuariorepository: UsuarioRepository,
+              private authService: AuthService) {
   }
 
   @Post()
@@ -17,6 +20,7 @@ export class UsuarioController {
     return this.usuariorepository.salvar(dadosUsuario)
   }
 
+  @UseGuards(JwtAuthGuard)
   @Get()
   async listUsuarios() {
     const usuariosSalvos = await this.usuariorepository.listar();
@@ -52,7 +56,7 @@ export class UsuarioController {
   @UseGuards(AuthGuard('local'))
   @Post('/login')
   async login(@Request() req) {
-    return req.user;
+    return this.authService.login(req.user);
   }
 
 }
