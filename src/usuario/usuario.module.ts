@@ -11,7 +11,8 @@ import { usuarioProviders } from "./usuario.providers"
   providers: [
     UsuarioRepository,
     EmailUnicoValidator,
-    ...usuarioProviders]
+    ...usuarioProviders],
+  exports: [UsuarioRepository]
 })
 export class UsuarioModule {
 

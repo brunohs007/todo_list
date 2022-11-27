@@ -1,9 +1,10 @@
-import { Body, Controller, Post, Get, Put, Param, Delete } from "@nestjs/common";
+import { Body, Controller, Post, Get, Put, Param, Delete, UseGuards, Request } from "@nestjs/common";
 import { UsuarioRepository } from "./usuario.repository";
 import { CriaUsuarioDto } from "./dto/CriaUsuario.dto";
 import { UsuarioEntity } from "./usuario.entity";
 import { ListaUsuarioDto } from "./dto/ListaUsuario.dto";
 import { AtualizaUsuarioDto } from "./dto/AtualizaUsuario.dto";
+import { AuthGuard } from "@nestjs/passport";
 
 @Controller('/usuarios')
 export class UsuarioController {
@@ -46,6 +47,12 @@ export class UsuarioController {
       usuario: usuarioRemovido,
       mensagem: 'Usuario removido com sucesso!'
     }
+  }
+
+  @UseGuards(AuthGuard('local'))
+  @Post('/login')
+  async login(@Request() req) {
+    return req.user;
   }
 
 }

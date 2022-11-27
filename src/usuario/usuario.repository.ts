@@ -55,12 +55,7 @@ export class UsuarioRepository {
     return possivelUsuario;
   }
 
-  // async existeComEmail(email: string, dadosUsuario: CriaUsuarioDto) {
-  //   const usuarioEntity = new UsuarioEntity();
-  //   usuarioEntity.email === dadosUsuario.email;
-  //   // const possivelUsuario = this.usuarioRepository.find(
-  //   //   usuarioEntity => usuarioEntity.email === email
-  //   // );
-  //   return usuarioEntity !== undefined;
-  // }
+  async findOne(email: string): Promise<UsuarioEntity | undefined> {
+    return this.usuarioRepository.findOne({where:{email:email}});
+  }
 }

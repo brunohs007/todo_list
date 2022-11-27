@@ -2,8 +2,6 @@ import { Inject, Injectable } from "@nestjs/common";
 import { Repository } from "typeorm";
 import { ListaEntity } from "./list.entity";
 import { CriaListaDto } from "./dto/CriaLista.dto";
-import { UsuarioEntity } from "../usuario/usuario.entity";
-import { AtualizaUsuarioDto } from "../usuario/dto/AtualizaUsuario.dto";
 import { AtualizaListaDto } from "./dto/AtualizaLista.dto";
 
 @Injectable()
