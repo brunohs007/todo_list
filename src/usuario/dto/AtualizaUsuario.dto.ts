@@ -16,5 +16,5 @@ export class AtualizaUsuarioDto {
     message: 'Senha precisa de uma letra maiúscula, um caractere especial, pelo menos 6 caracteres e até 15 caracteres',
   })
   @IsOptional()
-  senha: string;
+  password: string;
 }

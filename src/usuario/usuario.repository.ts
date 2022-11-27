@@ -16,7 +16,7 @@ export class UsuarioRepository {
   async salvar(dadosUsuario: CriaUsuarioDto) {
     const usuarioEntity = new UsuarioEntity();
     usuarioEntity.email = dadosUsuario.email;
-    usuarioEntity.senha = dadosUsuario.senha;
+    usuarioEntity.password = dadosUsuario.password;
     usuarioEntity.nome = dadosUsuario.nome;
     usuarioEntity.id = dadosUsuario.id;
     return this.usuarioRepository.save(usuarioEntity)
@@ -31,7 +31,7 @@ export class UsuarioRepository {
     const usuario = this.buscaPorId(id);
     const usuarioEntity = new UsuarioEntity();
     usuarioEntity.email = dadosParaAtualizar.email;
-    usuarioEntity.senha = dadosParaAtualizar.senha;
+    usuarioEntity.password = dadosParaAtualizar.password;
     usuarioEntity.nome = dadosParaAtualizar.nome;
 
     await this.usuarioRepository.update({id}, usuarioEntity);
