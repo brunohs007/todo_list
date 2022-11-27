@@ -4,6 +4,7 @@ import { Repository } from 'typeorm';
 import { CriaUsuarioDto } from "./dto/CriaUsuario.dto";
 import { ListaUsuarioDto } from "./dto/ListaUsuario.dto";
 import { AtualizaUsuarioDto } from "./dto/AtualizaUsuario.dto";
+import * as bcrypt from 'bcrypt';
 
 @Injectable()
 export class UsuarioRepository {
@@ -16,7 +17,7 @@ export class UsuarioRepository {
   async salvar(dadosUsuario: CriaUsuarioDto) {
     const usuarioEntity = new UsuarioEntity();
     usuarioEntity.email = dadosUsuario.email;
-    usuarioEntity.password = dadosUsuario.password;
+    usuarioEntity.password = bcrypt.hashSync(dadosUsuario.password, 8);
     usuarioEntity.nome = dadosUsuario.nome;
     usuarioEntity.id = dadosUsuario.id;
     return this.usuarioRepository.save(usuarioEntity)

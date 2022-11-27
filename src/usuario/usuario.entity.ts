@@ -16,8 +16,8 @@ export class UsuarioEntity{
   email: string;
 
   @Column({ length: 255 })
-  @MinLength(6, {message: 'A senha deve ter no minimo 6 caracteres'})
-  @MaxLength(15, {message: 'A senha deve conter no maximo 15 caracteres'})
+  @MinLength(6)
+  @MaxLength(15)
   @Matches(/((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z])(?=.*[$*&@#]).*$/, {
     message: 'Senha precisa de uma letra maiúscula, um caractere especial, pelo menos 6 caracteres e até 15 caracteres',
   })
