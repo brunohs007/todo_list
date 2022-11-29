@@ -1,4 +1,7 @@
 import { IsEmail, IsNotEmpty, IsOptional, Matches, MaxLength, MinLength } from "class-validator";
+import { OneToMany } from "typeorm";
+import { ListaEntity } from "../../Lista/list.entity";
+import { UsuarioEntity } from "../usuario.entity";
 
 export class AtualizaUsuarioDto {
 
@@ -17,4 +20,7 @@ export class AtualizaUsuarioDto {
   })
   @IsOptional()
   password: string;
+
+  @OneToMany(() => ListaEntity, () => UsuarioEntity)
+  todo_list: ListaEntity[]
 }

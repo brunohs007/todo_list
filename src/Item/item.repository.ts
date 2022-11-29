@@ -16,7 +16,6 @@ export class ItemRepository {
   salvar(dadosItem: CriaItemDto) {
     const itemEntity = new ItemEntity();
     itemEntity.id = dadosItem.id;
-    itemEntity.nome = dadosItem.nome;
     itemEntity.descricao = dadosItem.descricao;
     itemEntity.prioridade = dadosItem.prioridade;
     itemEntity.check = dadosItem.check;

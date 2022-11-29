@@ -1,5 +1,7 @@
 import { IsEmail, IsNotEmpty, IsString, Matches, MaxLength, MinLength } from "class-validator";
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from "typeorm";
+import { ListaEntity } from "../../Lista/list.entity";
+import { UsuarioEntity } from "../usuario.entity";
 
 @Entity()
 export class CriaUsuarioDto {
@@ -20,4 +22,7 @@ export class CriaUsuarioDto {
     message: 'Senha precisa de uma letra maiúscula, um caractere especial, pelo menos 6 caracteres e até 15 caracteres',
   })
   password: string;
+
+  @OneToMany(() => ListaEntity, () => UsuarioEntity)
+  todo_list: ListaEntity[]
 }

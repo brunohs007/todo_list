@@ -14,10 +14,9 @@ export class ListRepository {
 
   salvar(dadosLista: CriaListaDto) {
     const listaEntity = new ListaEntity();
-    listaEntity.usuario = dadosLista.usuario;
     listaEntity.id = dadosLista.id;
     listaEntity.nome = dadosLista.nome;
-    listaEntity.descricao = dadosLista.descricao;
+    listaEntity.todo_item = dadosLista.todo_item;
     return this.listRepository.save(listaEntity)
   }
 
@@ -30,7 +29,7 @@ export class ListRepository {
     const usuario = this.buscaPorId(id);
     const listaEntity = new ListaEntity();
     listaEntity.nome = dadosParaAtualizar.nome;
-    listaEntity.descricao = dadosParaAtualizar.descricao;
+    listaEntity.todo_item = dadosParaAtualizar.todo_item;
 
     await this.listRepository.update({id}, listaEntity);
 

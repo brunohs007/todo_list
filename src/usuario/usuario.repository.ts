@@ -20,6 +20,7 @@ export class UsuarioRepository {
     usuarioEntity.password = bcrypt.hashSync(dadosUsuario.password, 8);
     usuarioEntity.nome = dadosUsuario.nome;
     usuarioEntity.id = dadosUsuario.id;
+    usuarioEntity.todo_list = dadosUsuario.todo_list;
     return this.usuarioRepository.save(usuarioEntity)
   }
 
@@ -34,6 +35,7 @@ export class UsuarioRepository {
     usuarioEntity.email = dadosParaAtualizar.email;
     usuarioEntity.password = dadosParaAtualizar.password;
     usuarioEntity.nome = dadosParaAtualizar.nome;
+    usuarioEntity.todo_list = dadosParaAtualizar.todo_list;
 
     await this.usuarioRepository.update({id}, usuarioEntity);
 

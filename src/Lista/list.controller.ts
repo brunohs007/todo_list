@@ -22,7 +22,6 @@ export class ListaController {
       usuario => new ListaTodosDto(
         usuario.id,
         usuario.nome,
-        usuario.descricao,
       )
     );
     return listaTudo

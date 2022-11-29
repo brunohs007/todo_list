@@ -6,6 +6,7 @@ import {
 } from 'typeorm';
 import { IsNotEmpty } from "class-validator";
 import { ListaEntity } from "../Lista/list.entity";
+import { JoinColumn } from "typeorm/browser";
 
 @Entity()
 export class ItemEntity {
@@ -15,8 +16,8 @@ export class ItemEntity {
   @Column({ type: 'text' })
   descricao: string;
 
-  @ManyToOne(() => ListaEntity)
-  nome: ListaEntity;
+  @ManyToOne(() => ListaEntity, () => ItemEntity)
+  todo_list: ListaEntity;
 
   @Column({ type: 'boolean' })
   prioridade: boolean;

@@ -1,24 +1,26 @@
 import {
   Column,
   Entity,
-  ManyToOne,
-  PrimaryGeneratedColumn,
-} from 'typeorm';
+  ManyToOne, OneToMany,
+  PrimaryGeneratedColumn
+} from "typeorm";
 import { IsNotEmpty } from "class-validator";
 import { UsuarioEntity } from "../usuario/usuario.entity";
+import { ItemEntity } from "../Item/item.entity";
+import { JoinColumn } from "typeorm/browser";
 
 @Entity()
 export class ListaEntity {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @ManyToOne(() => UsuarioEntity)
+  @ManyToOne( () => UsuarioEntity, () => ListaEntity)
   usuario: UsuarioEntity;
 
   @Column({ length: 100 })
   @IsNotEmpty({ message: 'Nome não pode ser vazio]'})
   nome: string;
 
-  @Column({ type: 'text' })
-  descricao: string;
+  @OneToMany(() => ItemEntity, () => ListaEntity)
+  todo_item: ItemEntity;
 }
