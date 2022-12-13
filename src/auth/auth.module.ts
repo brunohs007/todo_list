@@ -12,7 +12,7 @@ import { TokenModule } from "../token/token.module";
   imports: [UsuarioModule, PassportModule, TokenModule,
     JwtModule.register({
       secret: jwtConstants.secret,
-      signOptions: { expiresIn: '60s' },
+      signOptions: { expiresIn: '600s' },
     }),],
   providers: [AuthService, LocalStrategy, JwtStrategy],
   exports: [JwtModule, AuthService]

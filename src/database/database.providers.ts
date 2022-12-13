@@ -6,15 +6,15 @@ export const databaseProviders = [
     useFactory: async () => {
       const dataSource = new DataSource({
         type: 'mysql',
-        host: process.env.DB_HOST,
-        port: +process.env.DB_PORT,
-        username: process.env.DB_HOST,
-        password: process.env.DB_HOST,
-        database: process.env.DB_HOST,
+        host: '127.0.0.1',
+        port: 3306,
+        username: 'bruno',
+        password: 'brunoben007',
+        database: 'todoapi',
         entities: [
           __dirname + '/../**/*.entity{.ts,.js}',
         ],
-        synchronize: process.env.DB_SYNC == "true",
+        synchronize: true,
       });
 
       return dataSource.initialize();

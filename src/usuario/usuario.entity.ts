@@ -24,6 +24,6 @@ export class UsuarioEntity{
   })
   password: string;
 
-  @OneToMany(() => ListaEntity, () => UsuarioEntity)
+  @OneToMany(() => ListaEntity, (todo_list) => todo_list.usuario)
   todo_list: ListaEntity[];
 }

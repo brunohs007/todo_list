@@ -14,7 +14,7 @@ export class ListaEntity {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @ManyToOne( () => UsuarioEntity, () => ListaEntity)
+  @ManyToOne( () => UsuarioEntity, (usuario) => usuario.todo_list, { eager: true })
   usuario: UsuarioEntity;
 
   @Column({ length: 100 })
