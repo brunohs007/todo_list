@@ -22,7 +22,4 @@ export class CriaUsuarioDto {
     message: 'Senha precisa de uma letra maiúscula, um caractere especial, pelo menos 6 caracteres e até 15 caracteres',
   })
   password: string;
-
-  @OneToMany(() => ListaEntity, () => UsuarioEntity)
-  todo_list: ListaEntity[]
 }
