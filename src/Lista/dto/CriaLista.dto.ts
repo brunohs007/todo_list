@@ -18,5 +18,5 @@ export class CriaListaDto {
   @IsNotEmpty({ message: 'Nome não pode ser vazio]'})
   nome: string;
 
-  todo_item: ItemEntity;
+  usuario: typeof UsuarioEntity
 }

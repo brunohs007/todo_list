@@ -1,8 +1,10 @@
-import { Body, Controller, Post, Get, Put, Param, Delete } from "@nestjs/common";
+import { Body, Controller, Post, Get, Put, Param, Delete, UseGuards, Request } from "@nestjs/common";
 import { ListRepository } from "./list.repository";
 import { CriaListaDto } from "./dto/CriaLista.dto";
 import { ListaTodosDto } from "./dto/ListaTodos.dto";
 import { AtualizaListaDto } from "./dto/AtualizaLista.dto";
+import { AuthGuard } from "@nestjs/passport";
+import { JwtAuthGuard } from "../auth/jwt-auth.guard";
 
 @Controller('/lista')
 export class ListaController {
@@ -10,9 +12,10 @@ export class ListaController {
   constructor(private listRepository: ListRepository) {
   }
 
+  @UseGuards(JwtAuthGuard)
   @Post()
-  async criaLista(@Body() dadosLista: CriaListaDto){
-    return this.listRepository.salvar(dadosLista)
+  async criaLista(@Body() dadosLista: CriaListaDto, @Request() req){
+    return this.listRepository.salvar(dadosLista, req.user.email)
   }
 
   @Get()

@@ -3,12 +3,15 @@ import { DatabaseModule } from "../database/database.module";
 import { ListRepository } from "./list.repository";
 import { ListaController } from "./list.controller";
 import { listProviders } from "./list.providers";
+import { UsuarioRepository } from "../usuario/usuario.repository";
+import { usuarioProviders } from "../usuario/usuario.providers";
 
 @Module({
   imports: [DatabaseModule],
   controllers: [ListaController],
-  providers: [ListRepository,
-    ...listProviders]
+  providers: [ListRepository, UsuarioRepository,
+    ...listProviders,
+    ...usuarioProviders]
 })
 export class ListModule {
 

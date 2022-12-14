@@ -3,21 +3,28 @@ import { Repository } from "typeorm";
 import { ListaEntity } from "./list.entity";
 import { CriaListaDto } from "./dto/CriaLista.dto";
 import { AtualizaListaDto } from "./dto/AtualizaLista.dto";
+import { UsuarioRepository } from "../usuario/usuario.repository";
+import { UsuarioEntity } from "../usuario/usuario.entity";
 
 @Injectable()
 export class ListRepository {
   constructor(
     @Inject('LISTA_REPOSITORY')
     private listRepository: Repository<ListaEntity>,
+    private usuarioRepository: UsuarioRepository
   ) {}
 
 
-  salvar(dadosLista: CriaListaDto) {
-    const listaEntity = new ListaEntity();
-    listaEntity.id = dadosLista.id;
-    listaEntity.nome = dadosLista.nome;
-    listaEntity.todo_item = dadosLista.todo_item;
-    return this.listRepository.save(listaEntity)
+  async salvar(dadosLista: CriaListaDto, email: string) {
+    const findEmail = await this.usuarioRepository.findOne(email)
+    if (findEmail){
+      const listaEntity = new ListaEntity();
+      listaEntity.id = dadosLista.id;
+      listaEntity.nome = dadosLista.nome;
+      return this.listRepository.save(listaEntity)
+    }else{
+      throw new Error("Usuario não encontrado")
+    }
   }
 
   async listar(): Promise<ListaEntity[]> {
