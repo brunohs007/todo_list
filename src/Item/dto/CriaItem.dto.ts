@@ -16,7 +16,7 @@ export class CriaItemDto {
   descricao: string;
 
   @ManyToOne(() => ListaEntity)
-  nome: ListaEntity;
+  todo_list: typeof ListaEntity;
 
   @IsBoolean()
   prioridade: boolean;

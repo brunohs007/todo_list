@@ -19,10 +19,10 @@ export class ItemEntity {
   @ManyToOne(() => ListaEntity, () => ItemEntity)
   todo_list: ListaEntity;
 
-  @Column({ type: 'boolean' })
+  @Column({ default: false})
   prioridade: boolean;
 
-  @Column({ type: 'boolean' })
+  @Column({default: false})
   check: boolean;
 
 

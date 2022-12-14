@@ -4,16 +4,19 @@ import { ItemEntity } from "./item.entity";
 import { CriaItemDto } from "./dto/CriaItem.dto";
 import { AtualizaListaDto } from "../Lista/dto/AtualizaLista.dto";
 import { AtualizaItemDto } from "./dto/AtualizaItem.dto";
+import { ListRepository } from "../Lista/list.repository";
 
 @Injectable()
 export class ItemRepository {
   constructor(
     @Inject('ITEM_REPOSITORY')
     private itemRepository: Repository<ItemEntity>,
+    private listRepository: ListRepository,
   ) {}
 
 
-  salvar(dadosItem: CriaItemDto) {
+  async salvar(dadosItem: CriaItemDto) {
+    const listEntity = await this.listRepository.buscaPorId(+dadosItem.todo_list)
     const itemEntity = new ItemEntity();
     itemEntity.id = dadosItem.id;
     itemEntity.descricao = dadosItem.descricao;
