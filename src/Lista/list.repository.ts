@@ -36,7 +36,6 @@ export class ListRepository {
     const usuario = this.buscaPorId(id);
     const listaEntity = new ListaEntity();
     listaEntity.nome = dadosParaAtualizar.nome;
-    listaEntity.todo_item = dadosParaAtualizar.todo_item;
 
     await this.listRepository.update({id}, listaEntity);
 

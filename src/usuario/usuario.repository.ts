@@ -34,7 +34,6 @@ export class UsuarioRepository {
     usuarioEntity.email = dadosParaAtualizar.email;
     usuarioEntity.password = dadosParaAtualizar.password;
     usuarioEntity.nome = dadosParaAtualizar.nome;
-    usuarioEntity.todo_list = dadosParaAtualizar.todo_list;
 
     await this.usuarioRepository.update({id}, usuarioEntity);
 

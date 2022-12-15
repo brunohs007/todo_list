@@ -20,7 +20,4 @@ export class AtualizaUsuarioDto {
   })
   @IsOptional()
   password: string;
-
-  @OneToMany(() => ListaEntity, () => UsuarioEntity)
-  todo_list: ListaEntity[]
 }

@@ -15,7 +15,6 @@ export class CriaItemDto {
   @IsString()
   descricao: string;
 
-  @ManyToOne(() => ListaEntity)
   todo_list: typeof ListaEntity;
 
   @IsBoolean()
