@@ -9,16 +9,18 @@ services:
     volumes:
       - .:/home/api
 
-    environment:
-      DB_HOST: database
-      DB_PORT: 5000
+#    environment:
+#      DB_HOST: database
+#      DB_PORT: 3306
 
   database:
     container_name: nest_db
+    restart: always
     image: mysql
     environment:
       MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
       MYSQL_DATABASE: ${DB_NAME}
       MYSQL_USER: ${DB_USERNAME}
     ports:
-      - "${DB_PORT}:3300"
+      - "${DB_PORT}:3306"
