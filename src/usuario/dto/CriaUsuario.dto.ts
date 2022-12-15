@@ -6,9 +6,6 @@ import { UsuarioEntity } from "../usuario.entity";
 @Entity()
 export class CriaUsuarioDto {
 
-  @PrimaryGeneratedColumn()
-  id: number;
-
   @IsString()
   @IsNotEmpty({ message: 'Nome não pode ser vazio]'})
   nome: string;

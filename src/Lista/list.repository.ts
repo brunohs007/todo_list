@@ -18,10 +18,8 @@ export class ListRepository {
   async salvar(dadosLista: CriaListaDto, email: string) {
     const user = await this.usuarioRepository.findOne(email)
     if (user){
-      const listaEntity = new ListaEntity();
-      listaEntity.id = dadosLista.id;
-      listaEntity.nome = dadosLista.nome;
-      return this.listRepository.save(listaEntity)
+      const listaEntity = { usuario: user.id, ...dadosLista}
+      await this.listRepository.save(listaEntity)
     }else{
       throw new Error("Usuario não encontrado")
     }

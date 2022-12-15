@@ -10,7 +10,7 @@ export const databaseProviders = [
         port: 3306,
         username: 'bruno',
         password: '12345678',
-        database: 'todoapi',
+        database: 'db',
         entities: [
           __dirname + '/../**/*.entity{.ts,.js}',
         ],

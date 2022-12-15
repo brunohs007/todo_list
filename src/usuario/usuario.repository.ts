@@ -19,7 +19,6 @@ export class UsuarioRepository {
     usuarioEntity.email = dadosUsuario.email;
     usuarioEntity.password = bcrypt.hashSync(dadosUsuario.password, 8);
     usuarioEntity.nome = dadosUsuario.nome;
-    usuarioEntity.id = dadosUsuario.id;
     return this.usuarioRepository.save(usuarioEntity)
   }
 

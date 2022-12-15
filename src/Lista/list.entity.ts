@@ -15,7 +15,7 @@ export class ListaEntity {
   id: number;
 
   @ManyToOne( () => UsuarioEntity, (usuario) => usuario.todo_list, { eager: true })
-  usuario: UsuarioEntity;
+  usuario = UsuarioEntity;
 
   @Column({ length: 100 })
   @IsNotEmpty({ message: 'Nome não pode ser vazio]'})
