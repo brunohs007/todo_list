@@ -18,14 +18,17 @@ export class ItemRepository {
   async salvar(dadosItem: CriaItemDto) {
     const listEntity = await this.listRepository.buscaPorId(+dadosItem.todo_list)
     if(listEntity){
-      const itemEntity = new ItemEntity();
-      itemEntity.id = dadosItem.id;
-      itemEntity.descricao = dadosItem.descricao;
-      itemEntity.prioridade = dadosItem.prioridade;
-      itemEntity.check = dadosItem.check;
-      return this.itemRepository.save(itemEntity)
-    }else{
-      throw new Error("Lista não encontrado")
+      const itemEntity = { ...dadosItem}
+      await this.itemRepository.save(itemEntity)
+
+    //   const itemEntity = new ItemEntity();
+    //   itemEntity.id = dadosItem.id;
+    //   itemEntity.descricao = dadosItem.descricao;
+    //   itemEntity.prioridade = dadosItem.prioridade;
+    //   itemEntity.check = dadosItem.check;
+    //   return this.itemRepository.save(itemEntity)
+    // }else{
+    //   throw new Error("Lista não encontrado")
     }
   }
 

@@ -4,7 +4,7 @@ import {
   ManyToOne,
   PrimaryGeneratedColumn,
 } from 'typeorm';
-import { IsBoolean, IsNotEmpty, IsString } from "class-validator";
+import { IsBoolean, IsNotEmpty, IsNumber, IsString } from "class-validator";
 import { ListaEntity } from "../../Lista/list.entity";
 
 @Entity()
@@ -15,6 +15,8 @@ export class CriaItemDto {
   @IsString()
   descricao: string;
 
+  @IsNumber()
+  @IsNotEmpty()
   todo_list: typeof ListaEntity;
 
   @IsBoolean()

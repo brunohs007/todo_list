@@ -17,7 +17,7 @@ export class ItemEntity {
   descricao: string;
 
   @ManyToOne(() => ListaEntity, () => ItemEntity)
-  todo_list: ListaEntity;
+  todo_list = ListaEntity;
 
   @Column({ default: false})
   prioridade: boolean;
