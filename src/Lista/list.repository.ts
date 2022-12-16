@@ -29,6 +29,13 @@ export class ListRepository {
     return this.listRepository.find();
   }
 
+  async listarItens(email:string, id: number){
+    return this.listRepository.createQueryBuilder('todo_list')
+      .leftJoinAndSelect('todo_list.todo_item', 'todo_item')
+      .where("todo_list.id = :id", {id: id})
+      .getMany()
+  }
+
   //dados parcialmente compativeis com UsuarioEntity
   async atualiza(id: number, dadosParaAtualizar: AtualizaListaDto) {
     const usuario = this.buscaPorId(id);

@@ -33,6 +33,12 @@ export class UsuarioController {
     return usuariosLista
   }
 
+  @UseGuards(JwtAuthGuard)
+  @Get('/:id')
+  async findListUsuarios(@Request() req) {
+    return this.usuariorepository.listarListas(req.user.email);
+  }
+
   @Put('/:id')
   async atualizaUsuario(@Param('id') id:number, @Body() dadosAtualizar: AtualizaUsuarioDto){
     const usuarioAtualizado = await this.usuariorepository.atualiza(id, dadosAtualizar);

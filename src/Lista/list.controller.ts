@@ -30,6 +30,11 @@ export class ListaController {
     return listaTudo
   }
 
+  @Get('/:id')
+  async listItens(@Request() req, @Param('id') id:number) {
+    return this.listRepository.listarItens(req.user.email, +id);
+  }
+
   @Put('/:id')
   async atualizaLista(@Param('id') id:number, @Body() dadosAtualizar: AtualizaListaDto){
     const listaAtualizada = await this.listRepository.atualiza(id, dadosAtualizar);

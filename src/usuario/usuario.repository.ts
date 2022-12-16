@@ -26,6 +26,17 @@ export class UsuarioRepository {
     return this.usuarioRepository.find();
   }
 
+  async listarListas(email:string) {
+    const userMail = await this.findOne(email);
+    if (userMail) {
+      return this.usuarioRepository
+        .createQueryBuilder('usuario')
+        .leftJoinAndSelect('usuario.todo_list', 'todo_list')
+        .where('usuario.id = :id', { id: userMail.id })
+        .getMany();
+    }
+  }
+
   //dados parcialmente compativeis com UsuarioEntity
   async atualiza(id: number, dadosParaAtualizar: AtualizaUsuarioDto) {
     const usuario = this.buscaPorId(id);
