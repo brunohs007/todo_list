@@ -58,7 +58,7 @@ export class UsuarioRepository {
     return usuario;
   }
 
-  private buscaPorId(id:number){
+  buscaPorId(id:number){
     const possivelUsuario = this.usuarioRepository.findOne({ where: { id }});
     if (!possivelUsuario){
       throw new Error('Usuario nao encontrado');

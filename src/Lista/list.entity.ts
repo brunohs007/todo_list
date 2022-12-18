@@ -14,13 +14,13 @@ export class ListaEntity {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @ManyToOne( () => UsuarioEntity, (usuario) => usuario.todo_list, { eager: true })
+  @ManyToOne( () => UsuarioEntity, (usuario) => usuario.todo_list, { eager: true,  onDelete: "CASCADE"})
   usuario = UsuarioEntity;
 
   @Column({ length: 100 })
   @IsNotEmpty({ message: 'Nome não pode ser vazio]'})
   nome: string;
 
-  @OneToMany(() => ItemEntity, () => ListaEntity)
+  @OneToMany(() => ItemEntity, (todo_item) => todo_item.todo_list)
   todo_item: ItemEntity;
 }

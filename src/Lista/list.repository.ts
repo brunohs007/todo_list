@@ -15,10 +15,11 @@ export class ListRepository {
   ) {}
 
 
-  async salvar(dadosLista: CriaListaDto, email: string) {
-    const user = await this.usuarioRepository.findOne(email)
+  async salvar(dadosLista: CriaListaDto, userId: number) {
+    const user = await this.usuarioRepository.buscaPorId(userId)
     if (user){
       const listaEntity = { usuario: user.id, ...dadosLista}
+
       await this.listRepository.save(listaEntity)
     }else{
       throw new Error("Usuario não encontrado")
@@ -29,7 +30,7 @@ export class ListRepository {
     return this.listRepository.find();
   }
 
-  async listarItens(email:string, id: number){
+  async listarItens(id: number){
     return this.listRepository.createQueryBuilder('todo_list')
       .leftJoinAndSelect('todo_list.todo_item', 'todo_item')
       .where("todo_list.id = :id", {id: id})

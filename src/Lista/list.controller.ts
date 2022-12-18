@@ -15,7 +15,7 @@ export class ListaController {
 
   @Post()
   async criaLista(@Body() dadosLista: CriaListaDto, @Request() req){
-    return this.listRepository.salvar(dadosLista, req.user.email)
+    return this.listRepository.salvar(dadosLista, req.user.userId)
   }
 
   @Get()
@@ -32,7 +32,7 @@ export class ListaController {
 
   @Get('/:id')
   async listItens(@Request() req, @Param('id') id:number) {
-    return this.listRepository.listarItens(req.user.email, +id);
+    return this.listRepository.listarItens(id);
   }
 
   @Put('/:id')

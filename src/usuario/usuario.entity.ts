@@ -13,14 +13,14 @@ export class UsuarioEntity{
   nome: string;
 
   @Column({ length: 100, unique: true })
-  @IsEmail(undefined, { message: 'Email informado invalido'})
+  @IsEmail( { message: 'Email informado invalido'})
   email: string;
 
   @Column({ length: 255 })
   @MinLength(6)
   @MaxLength(15)
-  @Matches(/((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z])(?=.*[$*&@#]).*$/, {
-    message: 'Senha precisa de uma letra maiúscula, um caractere especial, pelo menos 6 caracteres e até 15 caracteres',
+  @Matches(/((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z])(?=.*[$*&@#])(?=.[0-9]).*$/, {
+    message: 'Senha precisa de uma letra maiúscula, um numero, um caractere especial, pelo menos 6 caracteres e até 15 caracteres',
   })
   password: string;
 

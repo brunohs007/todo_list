@@ -16,7 +16,7 @@ export class ItemEntity {
   @Column({ type: 'text' })
   descricao: string;
 
-  @ManyToOne(() => ListaEntity, () => ItemEntity)
+  @ManyToOne(() => ListaEntity, (todo_list) => todo_list.todo_item, { eager: true,  onDelete: "CASCADE"})
   todo_list = ListaEntity;
 
   @Column({ default: false})
