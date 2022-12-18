@@ -36,7 +36,7 @@ export class UsuarioController {
   @UseGuards(JwtAuthGuard)
   @Get('/:id')
   async findListUsuarios(@Request() req) {
-    return this.usuariorepository.listarListas(req.user.email);
+    return this.usuariorepository.listarListas(req.user.userId);
   }
 
   @Put('/:id')

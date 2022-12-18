@@ -26,8 +26,8 @@ export class UsuarioRepository {
     return this.usuarioRepository.find();
   }
 
-  async listarListas(email:string) {
-    const userMail = await this.findOne(email);
+  async listarListas(userId: number) {
+    const userMail = await this.buscaPorId(userId);
     if (userMail) {
       return this.usuarioRepository
         .createQueryBuilder('usuario')
