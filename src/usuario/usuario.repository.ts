@@ -42,7 +42,7 @@ export class UsuarioRepository {
     const usuario = this.buscaPorId(id);
     const usuarioEntity = new UsuarioEntity();
     usuarioEntity.email = dadosParaAtualizar.email;
-    usuarioEntity.password = dadosParaAtualizar.password;
+    usuarioEntity.password = bcrypt.hashSync(dadosParaAtualizar.password, 8);
     usuarioEntity.nome = dadosParaAtualizar.nome;
 
     await this.usuarioRepository.update({id}, usuarioEntity);
