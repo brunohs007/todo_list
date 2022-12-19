@@ -1,5 +1,5 @@
 FROM node:16.13.2
 
-WORKDIR /home/api
+WORKDIR /app
 
 CMD npm run start:docker:dev
