@@ -39,14 +39,7 @@ export class ListRepository {
 
   //dados parcialmente compativeis com UsuarioEntity
   async atualiza(id: number, dadosParaAtualizar: AtualizaListaDto) {
-    const usuario = this.buscaPorId(id);
-    const listaEntity = new ListaEntity();
-    listaEntity.nome = dadosParaAtualizar.nome;
-
-    await this.listRepository.update({id}, listaEntity);
-
-    return usuario;
-
+    return this.listRepository.update(id, dadosParaAtualizar);
   }
 
   async deleta(id:number) {

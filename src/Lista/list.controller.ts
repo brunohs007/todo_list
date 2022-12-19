@@ -37,11 +37,7 @@ export class ListaController {
 
   @Put('/:id')
   async atualizaLista(@Param('id') id:number, @Body() dadosAtualizar: AtualizaListaDto){
-    const listaAtualizada = await this.listRepository.atualiza(id, dadosAtualizar);
-    return{
-      usuario: listaAtualizada,
-      mensagem: 'usuario atualizado com sucesso!',
-    }
+    return  this.listRepository.atualiza(id, dadosAtualizar);
   }
 
   @Delete('/:id')
