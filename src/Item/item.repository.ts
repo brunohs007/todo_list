@@ -17,7 +17,6 @@ export class ItemRepository {
 
   async salvar(dadosItem: CriaItemDto) {
     const listEntity = await this.listRepository.buscaPorId(+dadosItem.todo_list)
-    console.log(listEntity)
     if(listEntity){
       const itemEntity = {...dadosItem}
       await this.itemRepository.save(itemEntity)
@@ -32,16 +31,7 @@ export class ItemRepository {
 
   // //dados parcialmente compativeis com UsuarioEntity
   async atualiza(id: number, dadosParaAtualizar: AtualizaItemDto) {
-    const item = this.buscaPorId(id);
-    const itemEntity = new ItemEntity();
-    itemEntity.descricao = dadosParaAtualizar.descricao;
-    itemEntity.prioridade = dadosParaAtualizar.prioridade;
-    itemEntity.check = dadosParaAtualizar.check;
-
-    await this.itemRepository.update({id}, itemEntity);
-
-    return item;
-
+    return this.itemRepository.update(id, dadosParaAtualizar);
   }
 
   async deleta(id:number) {

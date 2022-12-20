@@ -1,9 +1,11 @@
-import { Body, Controller, Post, Get, Put, Param, Delete } from "@nestjs/common";
+import { Body, Controller, Post, Get, Put, Param, Delete, UseGuards } from "@nestjs/common";
 import { CriaItemDto } from "./dto/CriaItem.dto";
 import { ItemRepository } from "./item.repository";
 import { ListaItemDto } from "./dto/ListaItem.dto";
 import { AtualizaItemDto } from "./dto/AtualizaItem.dto";
+import { JwtAuthGuard } from "../auth/jwt-auth.guard";
 
+@UseGuards(JwtAuthGuard)
 @Controller('/item')
 export class ItemController {
 
@@ -31,11 +33,7 @@ export class ItemController {
 
   @Put('/:id')
   async atualizaItem(@Param('id') id:number, @Body() dadosAtualizar: AtualizaItemDto){
-    const itemAtualizado = await this.itemRepository.atualiza(id, dadosAtualizar);
-    return{
-      usuario: itemAtualizado,
-      mensagem: 'usuario atualizado com sucesso!',
-    }
+    return this.itemRepository.atualiza(id, dadosAtualizar);
   }
 
   @Delete('/:id')
