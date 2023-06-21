@@ -10,4 +10,6 @@ export class AtualizaListaDto {
   @IsString()
   @IsNotEmpty({ message: 'Nome não pode ser vazio]'})
   nome: string;
+
+  usuario: typeof UsuarioEntity;
 }

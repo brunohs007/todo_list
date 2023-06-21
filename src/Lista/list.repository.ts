@@ -38,8 +38,14 @@ export class ListRepository {
   }
 
   //dados parcialmente compativeis com UsuarioEntity
-  async atualiza(id: number, dadosParaAtualizar: AtualizaListaDto) {
-    return this.listRepository.update(id, dadosParaAtualizar);
+  async atualiza(id: number, dadosParaAtualizar: AtualizaListaDto, userId: number) {
+    const user = await this.usuarioRepository.buscaPorId(userId)
+    if (user){
+      const listaEntity = { usuario: user.id, ...dadosParaAtualizar}
+      await this.listRepository.update(id, listaEntity)
+    }else{
+      throw new Error("Usuario não encontrado")
+    }
   }
 
   async deleta(id:number) {
@@ -56,4 +62,5 @@ export class ListRepository {
     }
     return possivelLista;
   }
+
 }

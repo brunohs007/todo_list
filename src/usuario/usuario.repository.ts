@@ -58,8 +58,8 @@ export class UsuarioRepository {
     return usuario;
   }
 
-  buscaPorId(id:number){
-    const possivelUsuario = this.usuarioRepository.findOne({ where: { id }});
+  async buscaPorId(userId: number): Promise<UsuarioEntity>{
+    const possivelUsuario = await this.usuarioRepository.findOne({ where: { id: userId }});
     if (!possivelUsuario){
       throw new Error('Usuario nao encontrado');
     }
