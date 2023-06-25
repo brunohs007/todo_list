@@ -6,7 +6,7 @@ export const databaseProviders = [
     useFactory: async () => {
       const dataSource = new DataSource({
         type: 'mysql',
-        host: 'localhost',
+        host: 'database-1.cydbbxlxmakq.sa-east-1.rds.amazonaws.com',
         port: 3306,
         username: 'bruno',
         password: '12345678',
